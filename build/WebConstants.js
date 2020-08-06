@@ -1,4 +1,4 @@
-import { CameraType, ImageType } from './CameraModule.types';
+import { CameraType, ImageType } from './Camera.types';
 // https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints/aspectRatio
 export const VIDEO_ASPECT_RATIOS = {
     '3840x2160': 3840 / 2160,
@@ -24,4 +24,4 @@ export const FacingModeToCameraType = {
     user: CameraType.front,
     environment: CameraType.back,
 };
-//# sourceMappingURL=constants.js.map
+//# sourceMappingURL=WebConstants.js.map

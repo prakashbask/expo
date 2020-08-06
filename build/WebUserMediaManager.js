@@ -1,4 +1,7 @@
 /* eslint-env browser */
+/**
+ * A web-only module for ponyfilling the UserMedia API.
+ */
 import { Platform } from '@unimodules/core';
 export const userMediaRequested = false;
 export const mountedInstances = [];
@@ -114,4 +117,4 @@ async function supportsCameraType(labels, type, devices) {
     });
     return isCapable?.deviceId || hasCamera?.deviceId || null;
 }
-//# sourceMappingURL=UserMediaManager.js.map
+//# sourceMappingURL=WebUserMediaManager.js.map
