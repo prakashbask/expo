@@ -14,5 +14,5 @@ export const copyToClipboardAsync = jest.fn().mockResolvedValue(null);
 export const getRecentlyOpenedApps = jest.fn().mockResolvedValue([]);
 export const getCrashReport = jest.fn().mockResolvedValue(null);
 
-export const getSettingsAsync = jest.fn().mockResolvedValue({});
-export const setSettingsAsync = jest.fn().mockResolvedValue({});
+export const getMenuSettingsAsync = jest.fn().mockResolvedValue({});
+export const setMenuSettingsAsync = jest.fn().mockResolvedValue({});
