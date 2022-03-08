@@ -4,8 +4,8 @@ import {
   getCrashReport,
   installationID,
   isDevice,
+  getMenuSettingsAsync
 } from '../native-modules/DevLauncherInternal';
-import { getSettingsAsync } from '../native-modules/DevMenuInternal';
 import { getDevSessionsAsync } from './getDevSessionsAsync';
 import { restoreUserAsync } from './restoreUserAsync';
 
@@ -20,7 +20,7 @@ export async function getInitialData(): Promise<Partial<AppProvidersProps>> {
   });
 
   const initialBuildInfo = await getBuildInfoAsync();
-  const initialDevMenuSettings = await getSettingsAsync();
+  const initialDevMenuSettings = await getMenuSettingsAsync();
 
   const initialCrashReport = await getCrashReport();
 

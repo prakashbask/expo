@@ -54,3 +54,18 @@ export async function copyToClipboardAsync(content: string): Promise<null> {
 export const clientUrlScheme = DevLauncher.clientUrlScheme;
 export const installationID = DevLauncher.installationID;
 export const isDevice = !!DevLauncher.isDevice;
+
+export type DevMenuSettingsType = Partial<{
+  motionGestureEnabled: boolean;
+  touchGestureEnabled: boolean;
+  keyCommandsEnabled: boolean;
+  showsAtLaunch: boolean;
+}>;
+
+export async function getMenuSettingsAsync(): Promise<DevMenuSettingsType> {
+  return DevLauncher.getMenuSettingsAsync();
+}
+
+export async function setMenuSettingsAsync(settings: DevMenuSettingsType) {
+  return await DevLauncher.setMenuSettingsAsync(settings);
+}

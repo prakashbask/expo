@@ -12,6 +12,8 @@
 
 NSString *ON_NEW_DEEP_LINK_EVENT = @"expo.modules.devlauncher.onnewdeeplink";
 
+@import EXDevMenu;
+
 @implementation EXDevLauncherInternal
 
 + (NSString *)moduleName
@@ -135,6 +137,20 @@ RCT_EXPORT_METHOD(copyToClipboard:(NSString *)content
 {
   
   [[EXDevLauncherController sharedInstance] copyToClipboard:content];
+  resolve(nil);
+}
+
+RCT_EXPORT_METHOD(getMenuSettingsAsync:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+  resolve([[DevMenuManager shared] getMenuSettings]);
+}
+
+RCT_EXPORT_METHOD(setMenuSettingsAsync:(NSDictionary *)settings
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[DevMenuManager shared] setMenuSettings:settings];
   resolve(nil);
 }
 

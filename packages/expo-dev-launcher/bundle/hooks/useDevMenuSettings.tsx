@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import {
   DevMenuSettingsType,
-  getSettingsAsync,
-  setSettingsAsync,
-} from '../native-modules/DevMenuInternal';
+  getMenuSettingsAsync,
+  setMenuSettingsAsync,
+} from '../native-modules/DevLauncherInternal';
 
 export type DevMenuSettingsContext = {
   motionGestureEnabled: boolean;
@@ -36,7 +36,7 @@ export function DevMenuSettingsProvider({
   const [showsAtLaunch, setShowsAtLaunch] = React.useState(initialSettings?.showsAtLaunch);
 
   React.useEffect(() => {
-    getSettingsAsync().then((settings) => {
+    getMenuSettingsAsync().then((settings) => {
       if (settings.motionGestureEnabled) {
         setMotionGestureEnabled(true);
       }
@@ -52,7 +52,7 @@ export function DevMenuSettingsProvider({
   }, []);
 
   const onShowsAtLaunchChange = (enabled: boolean) => {
-    setSettingsAsync({
+    setMenuSettingsAsync({
       showsAtLaunch: enabled,
     }).catch(() => {
       // restore to previous value in case of error
@@ -63,7 +63,7 @@ export function DevMenuSettingsProvider({
   };
 
   const onMotionGestureChange = (enabled: boolean) => {
-    setSettingsAsync({
+    setMenuSettingsAsync({
       motionGestureEnabled: enabled,
     }).catch(() => {
       // restore to previous value in case of error
@@ -74,7 +74,7 @@ export function DevMenuSettingsProvider({
   };
 
   const onTouchGestureChange = (enabled: boolean) => {
-    setSettingsAsync({
+    setMenuSettingsAsync({
       touchGestureEnabled: enabled,
     }).catch(() => {
       // restore to previous value in case of error

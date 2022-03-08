@@ -13,3 +13,6 @@ export const addDeepLinkListener = jest.fn().mockImplementation(() => jest.fn())
 export const copyToClipboardAsync = jest.fn().mockResolvedValue(null);
 export const getRecentlyOpenedApps = jest.fn().mockResolvedValue([]);
 export const getCrashReport = jest.fn().mockResolvedValue(null);
+
+export const getSettingsAsync = jest.fn().mockResolvedValue({});
+export const setSettingsAsync = jest.fn().mockResolvedValue({});

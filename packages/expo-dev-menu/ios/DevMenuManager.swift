@@ -397,4 +397,25 @@ open class DevMenuManager: NSObject {
   public func getDevSettings() -> [AnyHashable: Any] {
     return EXDevMenuDevSettings.getDevSettings()
   }
+  
+  @objc
+  public func getMenuSettings() -> [AnyHashable: Any] {
+    return DevMenuSettings.serialize()
+  }
+  
+  @objc
+  public func setMenuSettings(_ settings: [String: Any]) {
+    if let motionGestureEnabled = settings["motionGestureEnabled"] as? Bool {
+      DevMenuSettings.motionGestureEnabled = motionGestureEnabled
+    }
+    if let touchGestureEnabled = settings["touchGestureEnabled"] as? Bool {
+      DevMenuSettings.touchGestureEnabled = touchGestureEnabled
+    }
+    if let keyCommandsEnabled = settings["keyCommandsEnabled"] as? Bool {
+      DevMenuSettings.keyCommandsEnabled = keyCommandsEnabled
+    }
+    if let showsAtLaunch = settings["showsAtLaunch"] as? Bool {
+      DevMenuSettings.showsAtLaunch = showsAtLaunch
+    }
+  }
 }

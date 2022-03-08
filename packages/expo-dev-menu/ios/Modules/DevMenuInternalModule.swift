@@ -73,23 +73,12 @@ public class DevMenuInternalModule: NSObject, RCTBridgeModule {
 
   @objc
   func getSettingsAsync(_ resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-    resolve(DevMenuSettings.serialize())
+    resolve(DevMenuManager.shared.getMenuSettings())
   }
 
   @objc
   func setSettingsAsync(_ dict: [String: Any], resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-    if let motionGestureEnabled = dict["motionGestureEnabled"] as? Bool {
-      DevMenuSettings.motionGestureEnabled = motionGestureEnabled
-    }
-    if let touchGestureEnabled = dict["touchGestureEnabled"] as? Bool {
-      DevMenuSettings.touchGestureEnabled = touchGestureEnabled
-    }
-    if let keyCommandsEnabled = dict["keyCommandsEnabled"] as? Bool {
-      DevMenuSettings.keyCommandsEnabled = keyCommandsEnabled
-    }
-    if let showsAtLaunch = dict["showsAtLaunch"] as? Bool {
-      DevMenuSettings.showsAtLaunch = showsAtLaunch
-    }
+    resolve(DevMenuManager.shared.setMenuSettings(dict))
   }
 
   @objc
