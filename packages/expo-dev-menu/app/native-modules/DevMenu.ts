@@ -18,6 +18,22 @@ export type DevSettings = {
 
 const DevMenu = NativeModules.ExpoDevMenuInternal;
 
+const { Extensions } = DevMenu.getConstants();
+
+Object.keys(Extensions).forEach((extensionName) => {
+  const fns = Extensions[extensionName];
+  Object.keys(fns).forEach((fnName) => {
+    // TODO - args (if needed)
+    Extensions[extensionName][fnName] = () => dispatchCallableAsync(fnName);
+  });
+});
+
+export function hasExtensionInstalled(extensionName: string) {
+  return Object.keys(Extensions).includes(extensionName);
+}
+
+export { Extensions };
+
 export async function dispatchCallableAsync(
   callableId: string,
   args: object | null = null
@@ -39,10 +55,6 @@ export function subscribeToOpenEvents(listener: () => void): EventSubscription {
 
 export function openDevMenuFromReactNative() {
   DevMenu.openDevMenuFromReactNative();
-}
-
-export async function navigateToLauncherAsync(): Promise<void> {
-  return await dispatchCallableAsync('backToLauncher');
 }
 
 export async function togglePerformanceMonitorAsync() {

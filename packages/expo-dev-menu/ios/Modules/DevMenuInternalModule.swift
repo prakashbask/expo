@@ -31,7 +31,10 @@ public class DevMenuInternalModule: NSObject, RCTBridgeModule {
 #else
     let doesDeviceSupportKeyCommands = false
 #endif
-    return ["doesDeviceSupportKeyCommands": doesDeviceSupportKeyCommands]
+    return [
+      "doesDeviceSupportKeyCommands": doesDeviceSupportKeyCommands,
+      "Extensions": DevMenuManager.shared.getExtensions(),
+    ]
   }
 
   @objc

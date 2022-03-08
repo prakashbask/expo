@@ -397,4 +397,30 @@ open class DevMenuManager: NSObject {
   public func getDevSettings() -> [AnyHashable: Any] {
     return EXDevMenuDevSettings.getDevSettings()
   }
+  
+  
+  public func getExtensions() -> [AnyHashable: Any] {
+    // moduleName -> fnName -> [fnArgs...]
+    var devExtensions: [String: [String: [String]]] = [:]
+    
+    extensions?.forEach({ ext in
+      if let extensionName: String = type(of: ext).extensionName?() {
+        
+        if (devExtensions[extensionName] == nil) {
+          devExtensions[extensionName] = [:]
+        }
+              
+        let items: [DevMenuCallableProvider] = ext.devMenuItems?(extensionSettings)?.getAllItems().filter({ $0 is DevMenuCallableProvider }) as! [DevMenuCallableProvider]
+        
+        items.forEach { item in
+          if let callableId = item.registerCallable?()?.id {
+            // TODO - handle fn args (if needed)
+            devExtensions[extensionName]![callableId] = []
+          }
+        }
+      }
+    })
+    
+    return devExtensions as [AnyHashable: Any]
+  }
 }

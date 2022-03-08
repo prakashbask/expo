@@ -16,6 +16,11 @@ RCT_EXTERN void RCTRegisterModule(Class);
   return @"ExpoDevelopmentClientDevMenuExtensions";
 }
 
++ (NSString *)extensionName
+{
+  return @"DevLauncher";
+}
+
 + (void)load
 {
   RCTRegisterModule(self);
@@ -33,7 +38,7 @@ RCT_EXTERN void RCTRegisterModule(Class);
   
   DevMenuItemsContainer *container = [DevMenuItemsContainer new];
   
-  DevMenuAction *backToLauncher = [[DevMenuAction alloc] initWithId:@"backToLauncher" action:^{
+  DevMenuAction *backToLauncher = [[DevMenuAction alloc] initWithId:@"navigateToLauncherAsync" action:^{
     dispatch_async(dispatch_get_main_queue(), ^{
       EXDevLauncherController *controller = [EXDevLauncherController sharedInstance];
       [controller navigateToLauncher];
