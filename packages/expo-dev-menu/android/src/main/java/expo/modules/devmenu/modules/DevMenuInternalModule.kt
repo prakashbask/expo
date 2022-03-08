@@ -20,10 +20,10 @@ interface DevMenuInternalMenuControllerModuleInterface {
   fun setOnboardingFinished(finished: Boolean)
 
   @ReactMethod
-  fun getSettingsAsync(promise: Promise)
+  fun getMenuSettingsAsync(promise: Promise)
 
   @ReactMethod
-  fun setSettingsAsync(settings: ReadableMap, promise: Promise)
+  fun setMenuSettingsAsync(settings: ReadableMap, promise: Promise)
 
   @ReactMethod
   fun openDevMenuFromReactNative()

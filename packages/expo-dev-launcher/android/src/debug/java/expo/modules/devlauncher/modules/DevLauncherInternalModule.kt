@@ -8,11 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.Promise
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import expo.modules.devlauncher.DevLauncherController.Companion.wasInitialized
 import expo.modules.devlauncher.helpers.DevLauncherInstallationIDHelper
@@ -22,6 +18,7 @@ import expo.modules.devlauncher.koin.DevLauncherKoinComponent
 import expo.modules.devlauncher.launcher.DevLauncherControllerInterface
 import expo.modules.devlauncher.launcher.DevLauncherIntentRegistryInterface
 import expo.modules.devlauncher.launcher.errors.DevLauncherErrorRegistry
+import expo.modules.devmenu.DevMenuManager
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 
@@ -191,6 +188,17 @@ class DevLauncherInternalModule(reactContext: ReactApplicationContext?)
     val clipboard = reactApplicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip = ClipData.newPlainText(null, content)
     clipboard.setPrimaryClip(clip)
+    promise.resolve(null)
+  }
+
+  @ReactMethod
+  fun getMenuSettingsAsync(promise: Promise) {
+    promise.resolve(DevMenuManager.getMenuSettings())
+  }
+
+  @ReactMethod
+  fun setMenuSettingsAsync(settings: ReadableMap, promise: Promise) {
+    DevMenuManager.setMenuSettings(settings)
     promise.resolve(null)
   }
 

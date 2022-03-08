@@ -63,7 +63,7 @@ export type DevMenuSettingsType = Partial<{
 }>;
 
 export async function getMenuSettingsAsync(): Promise<DevMenuSettingsType> {
-  return DevLauncher.getMenuSettingsAsync();
+  return await DevLauncher.getMenuSettingsAsync();
 }
 
 export async function setMenuSettingsAsync(settings: DevMenuSettingsType) {

@@ -12,10 +12,7 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import com.facebook.react.ReactInstanceManager
 import com.facebook.react.ReactNativeHost
-import com.facebook.react.bridge.LifecycleEventListener
-import com.facebook.react.bridge.ReactContext
-import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.bridge.UiThreadUtil
+import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import expo.interfaces.devmenu.DevMenuDelegateInterface
 import expo.interfaces.devmenu.DevMenuExtensionInterface
@@ -226,7 +223,6 @@ object DevMenuManager : DevMenuManagerInterface, LifecycleEventListener {
     maybeInitDevMenuHost(reactContext.currentActivity?.application
         ?: reactContext.applicationContext as Application)
     maybeStartDetectors(devMenuHost.getContext())
-
     settings = (testInterceptor.overrideSettings()
         ?: if (reactContext.hasNativeModule(DevMenuSettings::class.java)) {
           reactContext.getNativeModule(DevMenuSettings::class.java)!!
@@ -466,6 +462,29 @@ object DevMenuManager : DevMenuManagerInterface, LifecycleEventListener {
 
   override fun setCurrentScreen(screen: String?) {
     currentScreenName = screen
+  }
+
+  fun getMenuSettings(): WritableMap? {
+    var settings = getSettings()
+    return getSettings()?.serialize()
+  }
+
+  fun setMenuSettings(settings: ReadableMap) {
+    if (settings.hasKey("motionGestureEnabled")) {
+      getSettings()?.motionGestureEnabled = settings.getBoolean("motionGestureEnabled")
+    }
+
+    if (settings.hasKey("keyCommandsEnabled")) {
+      getSettings()?.keyCommandsEnabled = settings.getBoolean("keyCommandsEnabled")
+    }
+
+    if (settings.hasKey("showsAtLaunch")) {
+      getSettings()?.showsAtLaunch = settings.getBoolean("showsAtLaunch")
+    }
+
+    if (settings.hasKey("touchGestureEnabled")) {
+      getSettings()?.touchGestureEnabled = settings.getBoolean("touchGestureEnabled")
+    }
   }
 
   //endregion
