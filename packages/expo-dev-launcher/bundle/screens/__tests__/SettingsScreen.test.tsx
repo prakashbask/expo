@@ -1,15 +1,18 @@
 import * as React from 'react';
 
-import { copyToClipboardAsync } from '../../native-modules/DevLauncherInternal';
-import { DevMenuSettingsType, setSettingsAsync } from '../../native-modules/DevMenuInternal';
+import {
+  DevMenuSettingsType,
+  copyToClipboardAsync,
+  setMenuSettingsAsync,
+} from '../../native-modules/DevLauncherInternal';
 import { render, fireEvent, act } from '../../test-utils';
 import { SettingsScreen } from '../SettingsScreen';
 
-const mockSetSettingsAsync = setSettingsAsync as jest.Mock;
+const mockSetMenuSettingsAsync = setMenuSettingsAsync as jest.Mock;
 
 describe('<SettingsScreen />', () => {
   afterEach(() => {
-    mockSetSettingsAsync.mockClear();
+    mockSetMenuSettingsAsync.mockClear();
   });
 
   test('shows the correct settings on mount 1', async () => {
@@ -54,16 +57,16 @@ describe('<SettingsScreen />', () => {
     await act(async () => {
       const toggle = getByText(/shake device/i);
       fireEvent.press(toggle);
-      expect(setSettingsAsync).toHaveBeenCalledTimes(1);
-      expect(setSettingsAsync).toHaveBeenLastCalledWith({ motionGestureEnabled: true });
+      expect(setMenuSettingsAsync).toHaveBeenCalledTimes(1);
+      expect(setMenuSettingsAsync).toHaveBeenLastCalledWith({ motionGestureEnabled: true });
     });
 
     await act(async () => {
       const toggle = getByText(/shake device/i);
       fireEvent.press(toggle);
 
-      expect(setSettingsAsync).toHaveBeenCalledTimes(2);
-      expect(setSettingsAsync).toHaveBeenLastCalledWith({ motionGestureEnabled: false });
+      expect(setMenuSettingsAsync).toHaveBeenCalledTimes(2);
+      expect(setMenuSettingsAsync).toHaveBeenLastCalledWith({ motionGestureEnabled: false });
     });
   });
 
@@ -73,16 +76,16 @@ describe('<SettingsScreen />', () => {
     await act(async () => {
       const toggle = getByText(/three-finger long-press/i);
       fireEvent.press(toggle);
-      expect(setSettingsAsync).toHaveBeenCalledTimes(1);
-      expect(setSettingsAsync).toHaveBeenLastCalledWith({ touchGestureEnabled: true });
+      expect(setMenuSettingsAsync).toHaveBeenCalledTimes(1);
+      expect(setMenuSettingsAsync).toHaveBeenLastCalledWith({ touchGestureEnabled: true });
     });
 
     await act(async () => {
       const toggle = getByText(/three-finger long-press/i);
       fireEvent.press(toggle);
 
-      expect(setSettingsAsync).toHaveBeenCalledTimes(2);
-      expect(setSettingsAsync).toHaveBeenLastCalledWith({ touchGestureEnabled: false });
+      expect(setMenuSettingsAsync).toHaveBeenCalledTimes(2);
+      expect(setMenuSettingsAsync).toHaveBeenLastCalledWith({ touchGestureEnabled: false });
     });
   });
 
@@ -92,16 +95,16 @@ describe('<SettingsScreen />', () => {
     await act(async () => {
       const toggle = getByA11yLabel(/toggle showing menu at launch/i);
       fireEvent.press(toggle);
-      expect(setSettingsAsync).toHaveBeenCalledTimes(1);
-      expect(setSettingsAsync).toHaveBeenLastCalledWith({ showsAtLaunch: true });
+      expect(setMenuSettingsAsync).toHaveBeenCalledTimes(1);
+      expect(setMenuSettingsAsync).toHaveBeenLastCalledWith({ showsAtLaunch: true });
     });
 
     await act(async () => {
       const toggle = getByA11yLabel(/toggle showing menu at launch/i);
       fireEvent.press(toggle);
 
-      expect(setSettingsAsync).toHaveBeenCalledTimes(2);
-      expect(setSettingsAsync).toHaveBeenLastCalledWith({ showsAtLaunch: false });
+      expect(setMenuSettingsAsync).toHaveBeenCalledTimes(2);
+      expect(setMenuSettingsAsync).toHaveBeenLastCalledWith({ showsAtLaunch: false });
     });
   });
 
