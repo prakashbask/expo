@@ -1,12 +1,10 @@
 package expo.modules.devmenu.modules
 
 import android.content.Context.MODE_PRIVATE
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.BaseJavaModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.WritableMap
+import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
 import expo.interfaces.devmenu.DevMenuSettingsInterface
+import expo.modules.devmenu.DevMenuManager
 
 private const val DEV_SETTINGS_PREFERENCES = "expo.modules.devmenu.sharedpreferences"
 private const val DEV_MENU_SETTINGS_MODULE = "DevMenuSettings"
@@ -19,6 +17,10 @@ class DevMenuSettings(context: ReactApplicationContext) : BaseJavaModule(), DevM
   private val sharedPreferences = context.getSharedPreferences(DEV_SETTINGS_PREFERENCES, MODE_PRIVATE)
 
   override fun getName() = DEV_MENU_SETTINGS_MODULE
+
+  override fun canOverrideExistingModule(): Boolean {
+    return true
+  }
 
   /**
    * Whether to enable shake gesture.
@@ -74,5 +76,23 @@ class DevMenuSettings(context: ReactApplicationContext) : BaseJavaModule(), DevM
       .edit()
       .putBoolean(key, value)
       .apply()
+  }
+
+  override fun setSettings(settings: ReadableMap) {
+    if (settings.hasKey("motionGestureEnabled")) {
+      motionGestureEnabled = settings.getBoolean("motionGestureEnabled")
+    }
+
+    if (settings.hasKey("keyCommandsEnabled")) {
+      keyCommandsEnabled = settings.getBoolean("keyCommandsEnabled")
+    }
+
+    if (settings.hasKey("showsAtLaunch")) {
+      showsAtLaunch = settings.getBoolean("showsAtLaunch")
+    }
+
+    if (settings.hasKey("touchGestureEnabled")) {
+      touchGestureEnabled = settings.getBoolean("touchGestureEnabled")
+    }
   }
 }

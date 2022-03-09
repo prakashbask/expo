@@ -1,6 +1,7 @@
 package expo.modules.devmenu
 
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import expo.interfaces.devmenu.DevMenuSettingsInterface
 
@@ -39,4 +40,8 @@ open class DevMenuDefaultSettings : DevMenuSettingsInterface {
         putBoolean("showsAtLaunch", showsAtLaunch)
         putBoolean("isOnboardingFinished", isOnboardingFinished)
       }
+
+  override fun setSettings(settings: ReadableMap) {
+    methodUnavailable()
+  }
 }

@@ -465,26 +465,11 @@ object DevMenuManager : DevMenuManagerInterface, LifecycleEventListener {
   }
 
   fun getMenuSettings(): WritableMap? {
-    var settings = getSettings()
     return getSettings()?.serialize()
   }
 
   fun setMenuSettings(settings: ReadableMap) {
-    if (settings.hasKey("motionGestureEnabled")) {
-      getSettings()?.motionGestureEnabled = settings.getBoolean("motionGestureEnabled")
-    }
-
-    if (settings.hasKey("keyCommandsEnabled")) {
-      getSettings()?.keyCommandsEnabled = settings.getBoolean("keyCommandsEnabled")
-    }
-
-    if (settings.hasKey("showsAtLaunch")) {
-      getSettings()?.showsAtLaunch = settings.getBoolean("showsAtLaunch")
-    }
-
-    if (settings.hasKey("touchGestureEnabled")) {
-      getSettings()?.touchGestureEnabled = settings.getBoolean("touchGestureEnabled")
-    }
+    getSettings()?.setSettings(settings)
   }
 
   //endregion

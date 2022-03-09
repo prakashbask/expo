@@ -19,6 +19,7 @@ import expo.modules.devlauncher.launcher.DevLauncherControllerInterface
 import expo.modules.devlauncher.launcher.DevLauncherIntentRegistryInterface
 import expo.modules.devlauncher.launcher.errors.DevLauncherErrorRegistry
 import expo.modules.devmenu.DevMenuManager
+import expo.modules.devmenu.modules.DevMenuSettings
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 
@@ -193,12 +194,12 @@ class DevLauncherInternalModule(reactContext: ReactApplicationContext?)
 
   @ReactMethod
   fun getMenuSettingsAsync(promise: Promise) {
-    promise.resolve(DevMenuManager.getMenuSettings())
+    promise.resolve(reactApplicationContext.getNativeModule(DevMenuSettings::class.java)?.serialize())
   }
 
   @ReactMethod
   fun setMenuSettingsAsync(settings: ReadableMap, promise: Promise) {
-    DevMenuManager.setMenuSettings(settings)
+    reactApplicationContext.getNativeModule(DevMenuSettings::class.java)?.setSettings(settings)
     promise.resolve(null)
   }
 
