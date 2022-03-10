@@ -29,4 +29,6 @@ Pod::Spec.new do |s|
     test_spec.dependency 'Quick'
     test_spec.dependency 'Nimble'
   end
+  
+  s.dependency 'React-Core'
 end

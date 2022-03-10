@@ -1,5 +1,5 @@
 import { DevLauncherExtension } from 'expo-dev-launcher';
 
-import * as DevMenu from './DevMenu';
+import { Extensions } from './Extensions';
 
-export const DevLauncher = DevMenu.Extensions.DevLauncher as DevLauncherExtension;
+export const DevLauncher = Extensions.DevLauncher as DevLauncherExtension;

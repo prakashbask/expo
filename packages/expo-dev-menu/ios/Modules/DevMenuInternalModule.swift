@@ -1,8 +1,10 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 import SafariServices
+import EXDevMenuInterface
 
 @objc(DevMenuInternalModule)
 public class DevMenuInternalModule: NSObject, RCTBridgeModule {
+  
   public static func moduleName() -> String! {
     return "ExpoDevMenuInternal"
   }
@@ -22,19 +24,33 @@ public class DevMenuInternalModule: NSObject, RCTBridgeModule {
     self.manager = manager
   }
 
-  // MARK: JavaScript API
+  let devExtensions = EXDevExtensions()
 
+  // MARK: JavaScript API
+  
   @objc
   public func constantsToExport() -> [AnyHashable: Any] {
+    var extensions: [AnyHashable: Any] = [:];
+    
+    if let bridge = DevMenuManager.shared.currentBridge {
+      extensions = devExtensions.getExtensionsForBridge(bridge: bridge)
+    }
+ 
 #if targetEnvironment(simulator)
     let doesDeviceSupportKeyCommands = true
 #else
     let doesDeviceSupportKeyCommands = false
 #endif
+    
     return [
       "doesDeviceSupportKeyCommands": doesDeviceSupportKeyCommands,
-      "Extensions": DevMenuManager.shared.getExtensions(),
+      "Extensions": extensions,
     ]
+  }
+  
+  @objc
+  func callById(_ id: String?, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+    devExtensions.callById(id, resolve: resolve, reject: reject)
   }
 
   @objc

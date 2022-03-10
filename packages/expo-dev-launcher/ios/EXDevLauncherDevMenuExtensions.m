@@ -2,11 +2,12 @@
 
 @import EXDevMenuInterface;
 
-@interface EXDevLauncherDevMenuExtensions : NSObject <RCTBridgeModule, DevMenuExtensionProtocol>
+@interface EXDevLauncherDevMenuExtensions : NSObject <RCTBridgeModule, EXExtensionProtocol>
 
 @end
 
 @implementation EXDevLauncherDevMenuExtensions
+
 
 // Need to explicitly define `moduleName` here for dev menu to pick it up
 RCT_EXTERN void RCTRegisterModule(Class);
@@ -14,11 +15,6 @@ RCT_EXTERN void RCTRegisterModule(Class);
 + (NSString *)moduleName
 {
   return @"ExpoDevelopmentClientDevMenuExtensions";
-}
-
-+ (NSString *)extensionName
-{
-  return @"DevLauncher";
 }
 
 + (void)load
@@ -30,27 +26,28 @@ RCT_EXTERN void RCTRegisterModule(Class);
   return YES;
 }
 
-- (id<DevMenuItemsContainerProtocol>)devMenuItems:(id<DevMenuExtensionSettingsProtocol>)settings
+// EXExtensionProtocol
+
++ (NSString *)extensionName
 {
-  if (![EXDevLauncherController.sharedInstance isAppRunning]) {
-    return nil;
-  }
-  
-  DevMenuItemsContainer *container = [DevMenuItemsContainer new];
-  
-  DevMenuAction *backToLauncher = [[DevMenuAction alloc] initWithId:@"navigateToLauncherAsync" action:^{
+  return @"DevLauncher";
+}
+
++ (NSArray<EXDevExtensionFunction *> *)actions
+{
+  NSMutableArray *actions = [NSMutableArray new];
+    
+  EXDevExtensionFunction *navigateToLauncher = [[EXDevExtensionFunction alloc] initWithId:@"navigateToLauncherAsync" handler:^{
     dispatch_async(dispatch_get_main_queue(), ^{
       EXDevLauncherController *controller = [EXDevLauncherController sharedInstance];
       [controller navigateToLauncher];
     });
   }];
-  backToLauncher.label = ^{ return @"Back to Launcher"; };
-  backToLauncher.glyphName = ^{ return @"exit-to-app"; };
-  backToLauncher.importance = DevMenuItemImportanceMedium;
-  [backToLauncher registerKeyCommandWithInput:@"L" modifiers:UIKeyModifierCommand];
   
-  [container addItem:backToLauncher];
-  return container;
+  [actions addObject:navigateToLauncher];
+  
+  return actions;
 }
+
 
 @end
