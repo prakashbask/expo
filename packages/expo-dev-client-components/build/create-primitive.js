@@ -191,7 +191,7 @@ function useSelectors(selectors, props) {
                                     mergeDeep(variants, queries[mediaQuery]);
                                 }
                             }
-                            catch (error) {
+                            catch {
                                 console.warn(`Did not pass in a valid query selector '${expression}' -> try a key with a valid expression like '> {number}'`);
                             }
                         }
