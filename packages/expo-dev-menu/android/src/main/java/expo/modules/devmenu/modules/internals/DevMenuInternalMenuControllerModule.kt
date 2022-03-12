@@ -35,13 +35,6 @@ class DevMenuInternalMenuControllerModule(private val reactContext: ReactContext
     devMenuManager.getSettings()?.isOnboardingFinished = finished
   }
 
-  override fun getMenuSettingsAsync(promise: Promise) = promise.resolve(devMenuManager.getMenuSettings())
-
-  override fun setMenuSettingsAsync(settings: ReadableMap, promise: Promise) {
-    devMenuManager.setMenuSettings(settings)
-    promise.resolve(null)
-  }
-
   override fun openDevMenuFromReactNative() {
     devMenuManager.getReactInstanceManager()?.devSupportManager?.let {
       devMenuManager.closeMenu()

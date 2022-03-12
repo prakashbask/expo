@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import {
-  DevMenuSettingsType,
-  getMenuSettingsAsync,
-  setMenuSettingsAsync,
-} from '../native-modules/DevLauncherInternal';
+  DevMenuPreferencesType,
+  getMenuPreferencesAsync,
+  setMenuPreferencesAsync,
+} from '../native-modules/DevMenuPreferences';
 
-export type DevMenuSettingsContext = {
+export type DevMenuPreferencesContext = {
   motionGestureEnabled: boolean;
   setMotionGestureEnabled: (enabled: boolean) => void;
   touchGestureEnabled: boolean;
@@ -15,18 +15,18 @@ export type DevMenuSettingsContext = {
   setShowsAtLaunch: (enabled: boolean) => void;
 };
 
-const Context = React.createContext<DevMenuSettingsContext | null>(null);
-export const useDevMenuSettings = () => React.useContext(Context);
+const Context = React.createContext<DevMenuPreferencesContext | null>(null);
+export const useDevMenuPreferences = () => React.useContext(Context);
 
-type DevMenuSettingsProviderProps = {
+type DevMenuPreferencesProviderProps = {
   children: React.ReactNode;
-  initialSettings?: DevMenuSettingsType;
+  initialSettings?: DevMenuPreferencesType;
 };
 
-export function DevMenuSettingsProvider({
+export function DevMenuPreferencesProvider({
   children,
   initialSettings,
-}: DevMenuSettingsProviderProps) {
+}: DevMenuPreferencesProviderProps) {
   const [motionGestureEnabled, setMotionGestureEnabled] = React.useState(
     initialSettings?.motionGestureEnabled
   );
@@ -36,7 +36,7 @@ export function DevMenuSettingsProvider({
   const [showsAtLaunch, setShowsAtLaunch] = React.useState(initialSettings?.showsAtLaunch);
 
   React.useEffect(() => {
-    getMenuSettingsAsync().then((settings) => {
+    getMenuPreferencesAsync().then((settings) => {
       if (settings.motionGestureEnabled) {
         setMotionGestureEnabled(true);
       }
@@ -52,7 +52,7 @@ export function DevMenuSettingsProvider({
   }, []);
 
   const onShowsAtLaunchChange = (enabled: boolean) => {
-    setMenuSettingsAsync({
+    setMenuPreferencesAsync({
       showsAtLaunch: enabled,
     }).catch(() => {
       // restore to previous value in case of error
@@ -63,7 +63,7 @@ export function DevMenuSettingsProvider({
   };
 
   const onMotionGestureChange = (enabled: boolean) => {
-    setMenuSettingsAsync({
+    setMenuPreferencesAsync({
       motionGestureEnabled: enabled,
     }).catch(() => {
       // restore to previous value in case of error
@@ -74,7 +74,7 @@ export function DevMenuSettingsProvider({
   };
 
   const onTouchGestureChange = (enabled: boolean) => {
-    setMenuSettingsAsync({
+    setMenuPreferencesAsync({
       touchGestureEnabled: enabled,
     }).catch(() => {
       // restore to previous value in case of error

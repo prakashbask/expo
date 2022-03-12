@@ -3,9 +3,9 @@ package expo.modules.devmenu
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
-import expo.interfaces.devmenu.DevMenuSettingsInterface
+import expo.interfaces.devmenu.DevMenuPreferencesInterface
 
-open class DevMenuDefaultSettings : DevMenuSettingsInterface {
+open class DevMenuDefaultPreferences : DevMenuPreferencesInterface {
   private fun methodUnavailable() {
     throw NoSuchMethodError("You cannot change the default settings. Export `DevMenuSettings` module if you want to change the settings.")
   }
@@ -41,7 +41,7 @@ open class DevMenuDefaultSettings : DevMenuSettingsInterface {
         putBoolean("isOnboardingFinished", isOnboardingFinished)
       }
 
-  override fun setSettings(settings: ReadableMap) {
+  override fun setPreferences(settings: ReadableMap) {
     methodUnavailable()
   }
 }

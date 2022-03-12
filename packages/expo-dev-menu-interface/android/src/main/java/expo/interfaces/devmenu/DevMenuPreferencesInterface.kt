@@ -3,7 +3,7 @@ package expo.interfaces.devmenu
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 
-interface DevMenuSettingsInterface {
+interface DevMenuPreferencesInterface {
   /**
    * Whether to enable shake gesture.
    */
@@ -37,5 +37,5 @@ interface DevMenuSettingsInterface {
   /**
    * Updates settings from [ReadableMap] - the map can be a partial of all the possible settings options
    */
-  fun setSettings(settings: ReadableMap)
+  fun setPreferences(settings: ReadableMap)
 }

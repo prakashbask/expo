@@ -1,8 +1,10 @@
-import { AppRegistry } from 'react-native';
+import { AppRegistry, LogBox } from 'react-native';
 import { enableScreens } from 'react-native-screens';
 
 import { App } from './App';
-import LauncherApp from './views/LauncherApp';
+
+// ignore warnings about deprecated methods in RN
+LogBox.ignoreLogs(['EventEmitter.', 'new NativeEventEmitter()']);
 
 enableScreens(false);
 

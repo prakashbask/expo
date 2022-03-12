@@ -68,17 +68,7 @@ public class DevMenuInternalModule: NSObject, RCTBridgeModule {
 
   @objc
   func setOnboardingFinished(_ finished: Bool) {
-    DevMenuSettings.isOnboardingFinished = finished
-  }
-
-  @objc
-  func getSettingsAsync(_ resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-    resolve(DevMenuManager.shared.getMenuSettings())
-  }
-
-  @objc
-  func setSettingsAsync(_ dict: [String: Any], resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-    resolve(DevMenuManager.shared.setMenuSettings(dict))
+    DevMenuPreferences.isOnboardingFinished = finished
   }
 
   @objc

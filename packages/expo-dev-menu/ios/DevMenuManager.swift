@@ -81,7 +81,7 @@ open class DevMenuManager: NSObject {
   @objc
   public var currentBridge: RCTBridge? {
     didSet {
-      guard self.canLaunchDevMenuOnStart && DevMenuSettings.showsAtLaunch, let bridge = currentBridge else {
+      guard self.canLaunchDevMenuOnStart && DevMenuPreferences.showsAtLaunch, let bridge = currentBridge else {
         return
       }
       
@@ -118,7 +118,7 @@ open class DevMenuManager: NSObject {
     self.window = DevMenuWindow(manager: self)
     self.packagerConnectionHandler = DevMenuPackagerConnectionHandler(manager: self)
     self.packagerConnectionHandler?.setup()
-    DevMenuSettings.setup()
+    DevMenuPreferences.setup()
     self.readAutoLaunchDisabledState()
   }
 
@@ -309,7 +309,7 @@ open class DevMenuManager: NSObject {
    Returns bool value whether the onboarding view should be displayed by the dev menu view.
    */
   func shouldShowOnboarding() -> Bool {
-    return !DevMenuSettings.isOnboardingFinished
+    return !DevMenuPreferences.isOnboardingFinished
   }
 
   func readAutoLaunchDisabledState() {
@@ -396,26 +396,5 @@ open class DevMenuManager: NSObject {
   @objc
   public func getDevSettings() -> [AnyHashable: Any] {
     return EXDevMenuDevSettings.getDevSettings()
-  }
-  
-  @objc
-  public func getMenuSettings() -> [AnyHashable: Any] {
-    return DevMenuSettings.serialize()
-  }
-  
-  @objc
-  public func setMenuSettings(_ settings: [String: Any]) {
-    if let motionGestureEnabled = settings["motionGestureEnabled"] as? Bool {
-      DevMenuSettings.motionGestureEnabled = motionGestureEnabled
-    }
-    if let touchGestureEnabled = settings["touchGestureEnabled"] as? Bool {
-      DevMenuSettings.touchGestureEnabled = touchGestureEnabled
-    }
-    if let keyCommandsEnabled = settings["keyCommandsEnabled"] as? Bool {
-      DevMenuSettings.keyCommandsEnabled = keyCommandsEnabled
-    }
-    if let showsAtLaunch = settings["showsAtLaunch"] as? Bool {
-      DevMenuSettings.showsAtLaunch = showsAtLaunch
-    }
   }
 }

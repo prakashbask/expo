@@ -140,18 +140,4 @@ RCT_EXPORT_METHOD(copyToClipboard:(NSString *)content
   resolve(nil);
 }
 
-RCT_EXPORT_METHOD(getMenuSettingsAsync:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject)
-{
-  resolve([[DevMenuManager shared] getMenuSettings]);
-}
-
-RCT_EXPORT_METHOD(setMenuSettingsAsync:(NSDictionary *)settings
-                  resolver:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject)
-{
-  [[DevMenuManager shared] setMenuSettings:settings];
-  resolve(nil);
-}
-
 @end

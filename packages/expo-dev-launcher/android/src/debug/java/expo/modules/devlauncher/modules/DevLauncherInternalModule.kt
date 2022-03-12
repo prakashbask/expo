@@ -18,8 +18,6 @@ import expo.modules.devlauncher.koin.DevLauncherKoinComponent
 import expo.modules.devlauncher.launcher.DevLauncherControllerInterface
 import expo.modules.devlauncher.launcher.DevLauncherIntentRegistryInterface
 import expo.modules.devlauncher.launcher.errors.DevLauncherErrorRegistry
-import expo.modules.devmenu.DevMenuManager
-import expo.modules.devmenu.modules.DevMenuSettings
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 
@@ -189,17 +187,6 @@ class DevLauncherInternalModule(reactContext: ReactApplicationContext?)
     val clipboard = reactApplicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip = ClipData.newPlainText(null, content)
     clipboard.setPrimaryClip(clip)
-    promise.resolve(null)
-  }
-
-  @ReactMethod
-  fun getMenuSettingsAsync(promise: Promise) {
-    promise.resolve(reactApplicationContext.getNativeModule(DevMenuSettings::class.java)?.serialize())
-  }
-
-  @ReactMethod
-  fun setMenuSettingsAsync(settings: ReadableMap, promise: Promise) {
-    reactApplicationContext.getNativeModule(DevMenuSettings::class.java)?.setSettings(settings)
     promise.resolve(null)
   }
 

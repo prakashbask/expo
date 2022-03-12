@@ -10,7 +10,7 @@ import expo.modules.devlauncher.modules.DevLauncherDevMenuExtensions
 import expo.modules.devlauncher.modules.DevLauncherInternalModule
 import expo.modules.devlauncher.modules.DevLauncherModule
 import expo.modules.devlauncher.modules.DevLauncherAuth
-import expo.modules.devmenu.modules.DevMenuSettings
+import expo.modules.devmenu.modules.DevMenuPreferences
 import expo.modules.core.interfaces.ReactNativeHostHandler
 
 object DevLauncherPackageDelegate {
@@ -23,7 +23,7 @@ object DevLauncherPackageDelegate {
       DevLauncherInternalModule(reactContext),
       DevLauncherDevMenuExtensions(reactContext),
       DevLauncherAuth(reactContext),
-      DevMenuSettings(reactContext)
+      DevMenuPreferences(reactContext)
     )
 
   fun createApplicationLifecycleListeners(context: Context?): List<ApplicationLifecycleListener> = emptyList()
