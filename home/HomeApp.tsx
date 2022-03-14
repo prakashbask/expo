@@ -115,7 +115,7 @@ export default function HomeApp() {
     theme === 'dark' ? darkTheme.background.default : lightTheme.background.default;
 
   return (
-    <ThemePreferenceProvider theme={preferredAppearance as ThemePreference}>
+    <ThemePreferenceProvider theme={theme as ThemePreference}>
       <View
         style={[
           styles.container,
