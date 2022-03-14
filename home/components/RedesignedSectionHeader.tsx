@@ -7,7 +7,7 @@ type Props = {
   header: string;
 };
 
-export function TextHeader({ header }: Props) {
+export function RedesignedSectionHeader({ header }: Props) {
   return (
     <Row px="small" py="small" align="center" justify="between">
       <Heading
