@@ -5,7 +5,7 @@ export declare const Heading: import("react").ForwardRefExoticComponent<import("
     size?: "small" | "large" | undefined;
     align?: "center" | undefined;
     leading?: "large" | undefined;
-    type?: "mono" | undefined;
+    type?: "mono" | "InterBlack" | "InterBlackItalic" | "InterBold" | "InterBoldItalic" | "InterExtraBold" | "InterExtraBoldItalic" | "InterExtraLight" | "InterExtraLightItalic" | "InterRegular" | "InterItalic" | "InterLight" | "InterLightItalic" | "InterMedium" | "InterMediumItalic" | "InterSemiBold" | "InterSemiBoldItalic" | "InterThin" | "InterThinItalic" | undefined;
     weight?: "light" | "bold" | "normal" | "medium" | "thin" | "extralight" | "semibold" | "extrabold" | "black" | undefined;
     color?: "link" | "primary" | "secondary" | "default" | "error" | "warning" | "success" | undefined;
 } & import("react").RefAttributes<import("react-native").TextProps>>;
@@ -15,7 +15,7 @@ export declare const Text: import("react").ForwardRefExoticComponent<import("rea
     align?: "center" | undefined;
     size?: "small" | "medium" | "large" | undefined;
     leading?: "large" | undefined;
-    type?: "mono" | undefined;
+    type?: "mono" | "InterBlack" | "InterBlackItalic" | "InterBold" | "InterBoldItalic" | "InterExtraBold" | "InterExtraBoldItalic" | "InterExtraLight" | "InterExtraLightItalic" | "InterRegular" | "InterItalic" | "InterLight" | "InterLightItalic" | "InterMedium" | "InterMediumItalic" | "InterSemiBold" | "InterSemiBoldItalic" | "InterThin" | "InterThinItalic" | undefined;
     weight?: "light" | "bold" | "normal" | "medium" | "thin" | "extralight" | "semibold" | "extrabold" | "black" | undefined;
     color?: "link" | "primary" | "secondary" | "default" | "error" | "warning" | "success" | undefined;
 } & import("react").RefAttributes<import("react-native").TextProps>>;
@@ -35,7 +35,7 @@ export declare const TextInput: import("react").ForwardRefExoticComponent<import
     align?: "center" | undefined;
     size?: "small" | "medium" | "large" | undefined;
     leading?: "large" | undefined;
-    type?: "mono" | undefined;
+    type?: "mono" | "InterBlack" | "InterBlackItalic" | "InterBold" | "InterBoldItalic" | "InterExtraBold" | "InterExtraBoldItalic" | "InterExtraLight" | "InterExtraLightItalic" | "InterRegular" | "InterItalic" | "InterLight" | "InterLightItalic" | "InterMedium" | "InterMediumItalic" | "InterSemiBold" | "InterSemiBoldItalic" | "InterThin" | "InterThinItalic" | undefined;
     weight?: "light" | "bold" | "normal" | "medium" | "thin" | "extralight" | "semibold" | "extrabold" | "black" | undefined;
     color?: "link" | "primary" | "secondary" | "default" | "error" | "warning" | "success" | undefined;
 } & import("react").RefAttributes<import("react-native").TextInputProps>>;
