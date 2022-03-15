@@ -32,7 +32,11 @@
 {
   NSArray<NSString *> *allowedModules = @[@"RCT", @"DevMenu"];
   NSArray<Class> *filteredModuleList = [modules filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id  _Nullable clazz, NSDictionary<NSString *,id> * _Nullable bindings) {
-    if ([clazz conformsToProtocol:@protocol(DevMenuExtensionProtocol)]) {
+    if ([clazz conformsToProtocol:@protocol(EXDevExtensionProtocol)]) {
+      return true;
+    }
+    
+    if ([clazz conformsToProtocol:@protocol(EXDevExtensionProtocol)]) {
       return true;
     }
     

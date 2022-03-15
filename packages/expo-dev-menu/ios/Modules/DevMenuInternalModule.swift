@@ -24,18 +24,10 @@ public class DevMenuInternalModule: NSObject, RCTBridgeModule {
     self.manager = manager
   }
 
-  let devExtensions = EXDevExtensions()
-
   // MARK: JavaScript API
   
   @objc
   public func constantsToExport() -> [AnyHashable: Any] {
-    var extensions: [AnyHashable: Any] = [:];
-    
-    if let bridge = DevMenuManager.shared.currentBridge {
-      extensions = devExtensions.getExtensionsForBridge(bridge: bridge)
-    }
- 
 #if targetEnvironment(simulator)
     let doesDeviceSupportKeyCommands = true
 #else
@@ -44,15 +36,9 @@ public class DevMenuInternalModule: NSObject, RCTBridgeModule {
     
     return [
       "doesDeviceSupportKeyCommands": doesDeviceSupportKeyCommands,
-      "Extensions": extensions,
     ]
   }
   
-  @objc
-  func callById(_ id: String?, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-    devExtensions.callById(id, resolve: resolve, reject: reject)
-  }
-
   @objc
   func fetchDataSourceAsync(_ dataSourceId: String?, resolve: @escaping RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
     guard let dataSourceId = dataSourceId else {

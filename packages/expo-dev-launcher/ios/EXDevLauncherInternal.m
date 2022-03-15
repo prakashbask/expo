@@ -17,8 +17,6 @@ NSString *ON_NEW_DEEP_LINK_EVENT = @"expo.modules.devlauncher.onnewdeeplink";
 
 @interface EXDevLauncherInternal()
 
-@property (weak, nonatomic) EXDevExtensions *devExtensions;
-
 @end
 
 @implementation EXDevLauncherInternal
@@ -31,7 +29,6 @@ NSString *ON_NEW_DEEP_LINK_EVENT = @"expo.modules.devlauncher.onnewdeeplink";
 - (instancetype)init {
   if (self = [super init]) {
     [[EXDevLauncherController sharedInstance].pendingDeepLinkRegistry subscribe:self];
-    _devExtensions = [[EXDevExtensions alloc] init];
   }
   return self;
 }
@@ -72,17 +69,8 @@ NSString *ON_NEW_DEEP_LINK_EVENT = @"expo.modules.devlauncher.onnewdeeplink";
   return clientUrlScheme;
 }
 
-// the context of this bridge changes based on whether the host / launcher app are running
-@synthesize bridge = _bridge;
-
 - (NSDictionary *)constantsToExport
 {
-
-  NSDictionary *extensions = [NSDictionary new];  
-  if (_bridge) {
-    extensions = [_devExtensions getExtensionsForBridgeWithBridge:_bridge];
-  }
-  
 //
   BOOL isDevice = YES;
 #if TARGET_IPHONE_SIMULATOR
@@ -92,7 +80,6 @@ NSString *ON_NEW_DEEP_LINK_EVENT = @"expo.modules.devlauncher.onnewdeeplink";
     @"clientUrlScheme": self.findClientUrlScheme ?: [NSNull null],
     @"installationID": [EXDevLauncherController.sharedInstance.installationIDHelper getOrCreateInstallationID] ?: [NSNull null],
     @"isDevice": @(isDevice),
-    @"Extensions": extensions,
   };
 }
 
@@ -157,13 +144,6 @@ RCT_EXPORT_METHOD(copyToClipboard:(NSString *)content
   
   [[EXDevLauncherController sharedInstance] copyToClipboard:content];
   resolve(nil);
-}
-
-RCT_EXPORT_METHOD(callById:(NSString *)callableId
-                  resolver:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject)
-{
-  [_devExtensions callById:callableId resolve:resolve reject:reject];
 }
 
 @end

@@ -2,7 +2,7 @@
 
 @import EXDevMenuInterface;
 
-@interface EXDevLauncherDevMenuExtensions : NSObject <RCTBridgeModule, EXExtensionProtocol>
+@interface EXDevLauncherDevMenuExtensions : NSObject <RCTBridgeModule, EXDevExtensionProtocol>
 
 @end
 
@@ -14,7 +14,7 @@ RCT_EXTERN void RCTRegisterModule(Class);
 
 + (NSString *)moduleName
 {
-  return @"ExpoDevelopmentClientDevMenuExtensions";
+  return @"EXDevLauncherExtension";
 }
 
 + (void)load
@@ -26,28 +26,18 @@ RCT_EXTERN void RCTRegisterModule(Class);
   return YES;
 }
 
-// EXExtensionProtocol
-
-+ (NSString *)extensionName
+- (NSDictionary *)constantsToExport
 {
-  return @"DevLauncher";
+  return @{
+    @"isDevExtension": @YES
+  };
 }
 
-+ (NSArray<EXDevExtensionFunction *> *)actions
+RCT_EXPORT_METHOD(navigateToLauncherAsync:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  NSMutableArray *actions = [NSMutableArray new];
-    
-  EXDevExtensionFunction *navigateToLauncher = [[EXDevExtensionFunction alloc] initWithId:@"navigateToLauncherAsync" handler:^{
-    dispatch_async(dispatch_get_main_queue(), ^{
-      EXDevLauncherController *controller = [EXDevLauncherController sharedInstance];
-      [controller navigateToLauncher];
-    });
-  }];
-  
-  [actions addObject:navigateToLauncher];
-  
-  return actions;
+  [[EXDevLauncherController sharedInstance] navigateToLauncher];
+  resolve(nil);
 }
-
 
 @end

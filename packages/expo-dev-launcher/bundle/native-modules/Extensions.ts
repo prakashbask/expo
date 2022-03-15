@@ -1,19 +1,12 @@
 import { NativeModules } from 'react-native';
 
-const DevLauncher = NativeModules.EXDevLauncherInternal;
+const Extensions: { [moduleName: string]: any } = {};
 
-const { Extensions } = DevLauncher.getConstants();
-
-Object.keys(Extensions).forEach((extensionName) => {
-  const fns = Extensions[extensionName];
-  Object.keys(fns).forEach((fnName) => {
-    // TODO - args (if needed)
-    Extensions[extensionName][fnName] = () => DevLauncher.callById(`${extensionName}-${fnName}`);
-  });
+Object.keys(NativeModules).forEach((nativeModuleName) => {
+  const nativeModule = NativeModules[nativeModuleName];
+  if (nativeModule.isDevExtension) {
+    Extensions[nativeModuleName] = nativeModule;
+  }
 });
-
-export function hasExtensionInstalled(extensionName: string) {
-  return Object.keys(Extensions).includes(extensionName);
-}
 
 export { Extensions };
