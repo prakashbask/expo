@@ -12,8 +12,6 @@
 
 NSString *ON_NEW_DEEP_LINK_EVENT = @"expo.modules.devlauncher.onnewdeeplink";
 
-@import EXDevMenu;
-
 @implementation EXDevLauncherInternal
 
 + (NSString *)moduleName
