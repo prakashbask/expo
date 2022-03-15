@@ -17,7 +17,7 @@
 ### 🐛 Bug fixes
 
 - Update `fbemitter` to v3. ([#16245](https://github.com/expo/expo/pull/16245) by [@SimenB](https://github.com/SimenB))
-- Fix issue where default values for primitive-typed configuration values were not correctly set.
+- Fix issue where default values for primitive-typed configuration values were not correctly set. ([#16644](https://github.com/expo/expo/pull/16644) by [@esamelson](https://github.com/esamelson))
 
 ### 💡 Others
 
