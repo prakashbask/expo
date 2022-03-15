@@ -23,9 +23,6 @@ public protocol DevMenuExtensionProtocol {
    */
   @objc
   optional static func moduleName() -> String!
-  
-  @objc
-  optional static func extensionName() -> String!
 
   /**
    Returns an array of the dev menu items to show.

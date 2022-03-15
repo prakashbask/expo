@@ -1,10 +1,8 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 import SafariServices
-import EXDevMenuInterface
 
 @objc(DevMenuInternalModule)
 public class DevMenuInternalModule: NSObject, RCTBridgeModule {
-  
   public static func moduleName() -> String! {
     return "ExpoDevMenuInternal"
   }
@@ -25,7 +23,6 @@ public class DevMenuInternalModule: NSObject, RCTBridgeModule {
   }
 
   // MARK: JavaScript API
-  
   @objc
   public func constantsToExport() -> [AnyHashable: Any] {
 #if targetEnvironment(simulator)
@@ -33,12 +30,11 @@ public class DevMenuInternalModule: NSObject, RCTBridgeModule {
 #else
     let doesDeviceSupportKeyCommands = false
 #endif
-    
     return [
       "doesDeviceSupportKeyCommands": doesDeviceSupportKeyCommands,
     ]
   }
-  
+
   @objc
   func fetchDataSourceAsync(_ dataSourceId: String?, resolve: @escaping RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
     guard let dataSourceId = dataSourceId else {

@@ -10,14 +10,7 @@
 #import <EXDevLauncher-Swift.h>
 #endif
 
-@import EXDevMenuInterface;
-
-
 NSString *ON_NEW_DEEP_LINK_EVENT = @"expo.modules.devlauncher.onnewdeeplink";
-
-@interface EXDevLauncherInternal()
-
-@end
 
 @implementation EXDevLauncherInternal
 
@@ -79,7 +72,7 @@ NSString *ON_NEW_DEEP_LINK_EVENT = @"expo.modules.devlauncher.onnewdeeplink";
   return @{
     @"clientUrlScheme": self.findClientUrlScheme ?: [NSNull null],
     @"installationID": [EXDevLauncherController.sharedInstance.installationIDHelper getOrCreateInstallationID] ?: [NSNull null],
-    @"isDevice": @(isDevice),
+    @"isDevice": @(isDevice)
   };
 }
 
